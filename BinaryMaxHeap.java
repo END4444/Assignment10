@@ -23,7 +23,6 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
     }
     @SuppressWarnings("unchecked")
     public BinaryMaxHeap(List<? extends E> list){
-        backingArray = (E[]) new Object[list.size()+1];
         size = list.size();
         buildHeap(list);
     }
@@ -39,9 +38,9 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
     public void add(E item) {
         if(size == backingArray.length - 1)
             this.growArray(backingArray.length*2 + 1);
+        size++;
 
-        int i = ++this.size;
-        percolateUp(item, i);
+        percolateUp(item, size);
 
     }
 
@@ -56,9 +55,11 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
     public E extractMax() throws NoSuchElementException {
         E maxItem = this.peek();
 
-        backingArray[1] = backingArray[size--];
-
+        backingArray[1] = backingArray[size];
+        backingArray[size] = null;
+        size--;
         percolateDown(1);
+
 
         return maxItem;
     }
@@ -98,7 +99,7 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
     }
 
     private void percolateUp(E item, int i){
-        for(backingArray[0] = item; innerCompare(item, backingArray[i/2]) < 0; i /= 2)
+        for( backingArray[0]=item; innerCompare(item, backingArray[i/2]) < 0; i /= 2)
             backingArray[i] = backingArray[i/2];
         backingArray[i] = item;
         backingArray[0] = null;
