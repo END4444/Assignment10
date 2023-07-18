@@ -22,7 +22,7 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
     }
 
     public BinaryMaxHeap(List<? extends E> list){
-        backingArray = (E[]) new Object[list.size()];
+        backingArray = (E[]) new Object[list.size()+1];
         size = list.size();
         buildHeap(list);
     }
@@ -53,9 +53,13 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
 
     @Override
     public E extractMax() throws NoSuchElementException {
-        if (backingArray[1]==null)
-            throw new NoSuchElementException("there is no max element to return");
-        return backingArray[1];
+        E maxItem = this.peek();
+
+        backingArray[1] = backingArray[size--];
+
+        percolateDown(1);
+
+        return maxItem;
     }
 
     @Override
@@ -82,8 +86,11 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
         return newArray;
     }
     private void buildHeap(List<? extends E> list){
-        for(int i = (list.size()-1)/2; i > 0; i--)
-            percolateDown(list, i, list.size());
+         backingArray = (E[]) new Object[list.size()+1];
+        for (int i=1; i< backingArray.length;i++)
+            backingArray[i] = list.get(i-1);
+        for(int i = (backingArray.length-1)/2; i > 0; i--)
+            percolateDown(i);
 
 
     }
@@ -94,17 +101,17 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
         backingArray[i] = item;
         backingArray[0] = null;
     }
-    private void percolateDown(List<? extends E> list, int i, int length){
+    private void percolateDown( int i){
         int child;
         int loc = i;
-        E temp = list.get(i);
+        E temp = backingArray[i];
 
-        for( ; loc*2 <= length; loc = child){
+        for( ; loc*2 < backingArray.length; loc = child){
             child = loc*2;
-            if(child != length && innerCompare(list.get(child+1), list.get(child))< 0)
+            if(child != backingArray.length && innerCompare(backingArray[child+1] , backingArray[child])< 0)
                 child++;
-            if(innerCompare(list.get(child),temp)<0)
-                backingArray[loc] = list.get(child);
+            if(innerCompare(temp, backingArray[child])>0)
+                backingArray[loc] = backingArray[child];
             else
                 break;
         }
