@@ -9,24 +9,25 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
     int size;
     int startingArraySize =10;
     Comparator<? super E> cmp;
+    @SuppressWarnings("unchecked")
     public BinaryMaxHeap(){
 
         backingArray = (E[]) new Object[startingArraySize];
         size = 0;
     }
-
+    @SuppressWarnings("unchecked")
     public BinaryMaxHeap(Comparator<? super E> cmp){
         this.cmp=cmp;
         backingArray = (E[]) new Object[startingArraySize];
         size = 0;
     }
-
+    @SuppressWarnings("unchecked")
     public BinaryMaxHeap(List<? extends E> list){
         backingArray = (E[]) new Object[list.size()+1];
         size = list.size();
         buildHeap(list);
     }
-
+    @SuppressWarnings("unchecked")
     public BinaryMaxHeap(List<? extends E> list, Comparator<? super E> cmp){
         this.cmp = cmp;
         backingArray = (E[]) new Object[list.size()];
@@ -71,7 +72,7 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
     public boolean isEmpty() {
         return this.size==0;
     }
-
+    @SuppressWarnings("unchecked")
     @Override
     public void clear() {
         backingArray = (E[]) new Object[startingArraySize];
@@ -85,6 +86,7 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
             newArray[i] = backingArray[i];
         return newArray;
     }
+    @SuppressWarnings("unchecked")
     private void buildHeap(List<? extends E> list){
          backingArray = (E[]) new Object[list.size()+1];
         for (int i=1; i< backingArray.length;i++)
@@ -118,6 +120,7 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
 
         backingArray[loc] = temp;
     }
+    @SuppressWarnings("unchecked")
     private int innerCompare(E lhs, E rhs)
     {
         if(lhs == null | rhs == null)
@@ -126,6 +129,7 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
             return cmp.compare(rhs,lhs);
         return ((Comparable<? super E>)rhs).compareTo(lhs);
     }
+    @SuppressWarnings("unchecked")
     private void growArray(int newSize){
         E[] tempArray = (E[]) new Object[newSize];
         for(int i = 1; i< backingArray.length; i++)
