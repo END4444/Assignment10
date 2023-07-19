@@ -1,14 +1,11 @@
 package assignment10;
 
-import assignment09.HashTable;
-import assignment09.StudentBadHash;
-import assignment09.StudentGoodHash;
-import assignment09.StudentMediumHash;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.List;
 
 import static assignment10.FindKLargest.findKLargestHeap;
