@@ -109,6 +109,39 @@ public class BinaryMaxHeapTester {
     }
     
     @Test
+    void kthLargestReverseTest() {
+        List<Integer> temp = findKLargestHeap(list, 4, Comparator.reverseOrder());
+        List<Integer> tester = new ArrayList<Integer>();
+        tester.add(0);
+        tester.add(1);
+        tester.add(2);
+        tester.add(3);
+        assertEquals(tester, temp);
+    }
+    
+    @Test
+    void kthLargestSortTest() {
+        List<Integer> temp = findKLargestSort(list, 4);
+        List<Integer> tester = new ArrayList<Integer>();
+        tester.add(100);
+        tester.add(99);
+        tester.add(98);
+        tester.add(97);
+        assertEquals(tester, temp);
+    }
+    
+    @Test
+    void kthLargestReverseSortTest() {
+        List<Integer> temp = findKLargestSort(list, 4, Comparator.reverseOrder());
+        List<Integer> tester = new ArrayList<Integer>();
+        tester.add(0);
+        tester.add(1);
+        tester.add(2);
+        tester.add(3);
+        assertEquals(tester, temp);
+    }
+    
+    @Test
     void kethLargestThrowTest1() {
     	assertThrows(IllegalArgumentException.class, () -> { findKLargestHeap(list, -1); });
     	assertThrows(IllegalArgumentException.class, () -> { findKLargestHeap(list, 1000); });
