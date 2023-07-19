@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tester class for the binary max heap.
- * 
+ *
  * @author Austin Allen and Ethan Doman
  * @version July 18, 2023
  */
@@ -21,12 +21,16 @@ public class BinaryMaxHeapTester {
     BinaryMaxHeap<Integer> emptyHeap = new BinaryMaxHeap<Integer>();
     BinaryMaxHeap<Integer> intHeap = new BinaryMaxHeap<Integer>();
     List<Integer> list = new ArrayList<Integer>();
+    List<Integer> smallList = new ArrayList<Integer>();
 
     @BeforeEach
     void setUp() {
         for (int i = 0; i <= 100; i++){
             intHeap.add(i);
             list.add(i);
+        }
+        for (int i = 0; i <= 5; i++){
+            smallList.add(i);
         }
     }
 
@@ -82,5 +86,12 @@ public class BinaryMaxHeapTester {
         tester.add(98);
         tester.add(97);
         assertEquals(tester, temp);
+    }
+
+    @Test
+    void toArrayTest() {
+        Integer[] integerArray = new Integer[]{5,4,2,3,1,0};
+        BinaryMaxHeap<Integer> smallHeap = new BinaryMaxHeap<Integer>(smallList);
+        assertArrayEquals(integerArray, smallHeap.toArray());
     }
 }
