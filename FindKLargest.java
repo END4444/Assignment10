@@ -7,8 +7,8 @@ import java.util.List;
 /**
  * This class contains generic static methods for finding the k largest items in a list.
  * 
- * @author ??
- * @version ??
+ * @author Austin Allen and Ethan Doman
+ * @version July 19, 2023
  */
 public class FindKLargest {
 	
@@ -67,8 +67,11 @@ public class FindKLargest {
 
 		if(k> items.size()||k<0)
 			throw new IllegalArgumentException("k is out of range");
-
-		items.sort(Comparator.naturalOrder());
+		List<E> itemsCopy = new ArrayList<E>();
+		for (E item: items) {
+			itemsCopy.add(item);
+		}
+		itemsCopy.sort(Comparator.naturalOrder());
 		List<E> tempList = new ArrayList<E>();
 		for(int i = 0; i<=k;i++)
 			tempList.add(items.get(i));
@@ -88,7 +91,11 @@ public class FindKLargest {
 		if(k> items.size()||k<0)
 			throw new IllegalArgumentException("k is out of range");
 
-		items.sort(cmp);
+		List<E> itemsCopy = new ArrayList<E>();
+		for (E item: items) {
+			itemsCopy.add(item);
+		}
+		itemsCopy.sort(cmp);
 		List<E> tempList = new ArrayList<E>();
 		for(int i = 0; i<=k;i++)
 			tempList.add(items.get(i));
