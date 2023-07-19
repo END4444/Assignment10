@@ -6,16 +6,16 @@ import java.util.List;
 
 /**
  * This class contains generic static methods for finding the k largest items in a list.
- * 
+ *
  * @author Austin Allen and Ethan Doman
  * @version July 19, 2023
  */
 public class FindKLargest {
-	
+
 	/**
-	 * Determines the k largest items in the given list, using a binary max heap and the 
+	 * Determines the k largest items in the given list, using a binary max heap and the
 	 * natural ordering of the items.
-	 * 
+	 *
 	 * @param items - the given list
 	 * @param k - the number of largest items
 	 * @return a list of the k largest items, in descending order
@@ -36,7 +36,7 @@ public class FindKLargest {
 
 	/**
 	 * Determines the k largest items in the given list, using a binary max heap.
-	 * 
+	 *
 	 * @param items - the given list
 	 * @param k - the number of largest items
 	 * @param cmp - the comparator defining how to compare items
@@ -55,9 +55,9 @@ public class FindKLargest {
 	}
 
 	/**
-	 * Determines the k largest items in the given list, using Java's sort routine and the 
+	 * Determines the k largest items in the given list, using Java's sort routine and the
 	 * natural ordering of the items.
-	 * 
+	 *
 	 * @param items - the given list
 	 * @param k - the number of largest items
 	 * @return a list of the k largest items, in descending order
@@ -73,14 +73,14 @@ public class FindKLargest {
 		}
 		itemsCopy.sort(Comparator.naturalOrder());
 		List<E> tempList = new ArrayList<E>();
-		for(int i = 0; i<=k;i++)
-			tempList.add(items.get(i));
+		for(int i = itemsCopy.size()-1; i> itemsCopy.size()-1-k;i--)
+			tempList.add(itemsCopy.get(i));
 		return tempList;
 	}
 
 	/**
 	 * Determines the k largest items in the given list, using Java's sort routine.
-	 * 
+	 *
 	 * @param items - the given list
 	 * @param k - the number of largest items
 	 * @param cmp - the comparator defining how to compare items
@@ -97,8 +97,8 @@ public class FindKLargest {
 		}
 		itemsCopy.sort(cmp);
 		List<E> tempList = new ArrayList<E>();
-		for(int i = 0; i<=k;i++)
-			tempList.add(items.get(i));
+		for(int i = itemsCopy.size()-1; i> itemsCopy.size()-1-k;i--)
+			tempList.add(itemsCopy.get(i));
 		return tempList;
 	}
 }

@@ -49,6 +49,31 @@ public class BinaryMaxHeapTimingTest {
 
         }
     }
+
+    @Test
+    void addBestTime() {
+        BinaryMaxHeap<Integer> tester = new BinaryMaxHeap<Integer>();
+        for (int i = 1; i <= 100; i++) {
+            for (int y = 0; y < 10000 * i; y++) {
+                tester.add(largeIntegerList.get(y));
+            }
+
+            long startTime = System.nanoTime();
+            for (int j = 0; j < 10000; j++) {
+                tester.add(largeIntegerList.get(0));
+                tester.extractMax();
+            }
+            long endTime = System.nanoTime();
+            for (int j = 0; j < 10000; j++) {
+                largeIntegerList.get(0);
+                tester.extractMax();
+            }
+            long costForLoop = System.nanoTime();
+            System.out.println((endTime - startTime - (costForLoop - endTime)) / 10000);
+
+
+        }
+    }
     @Test
     void ExtractMaxTime() {
         BinaryMaxHeap<Integer> tester = new BinaryMaxHeap<Integer>();

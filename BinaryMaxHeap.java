@@ -44,6 +44,7 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
      *
      * @param list
      */
+    @SuppressWarnings("unchecked")
     public BinaryMaxHeap(List<? extends E> list){
         size = list.size();
         buildHeap(list);
@@ -55,8 +56,10 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
      * @param list
      * @param cmp
      */
+    @SuppressWarnings("unchecked")
     public BinaryMaxHeap(List<? extends E> list, Comparator<? super E> cmp){
         this.cmp = cmp;
+        backingArray = (E[]) new Object[list.size()];
         size = list.size();
         buildHeap(list);
     }

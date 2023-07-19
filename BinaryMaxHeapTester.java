@@ -3,10 +3,7 @@ package assignment10;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import static assignment10.FindKLargest.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,19 +17,22 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BinaryMaxHeapTester {
 
     BinaryMaxHeap<Integer> emptyHeap = new BinaryMaxHeap<Integer>();
-    BinaryMaxHeap<Integer> intHeap = new BinaryMaxHeap<Integer>();
+    BinaryMaxHeap<Integer> intHeap;
     List<Integer> list = new ArrayList<Integer>();
+    List<Integer> copyList = new ArrayList<Integer>();
     List<Integer> smallList = new ArrayList<Integer>();
 
     @BeforeEach
     void setUp() {
         for (int i = 0; i <= 100; i++){
-            intHeap.add(i);
+            copyList.add(i);
             list.add(i);
         }
         for (int i = 0; i <= 5; i++){
             smallList.add(i);
         }
+        Collections.shuffle(copyList);
+        intHeap=new BinaryMaxHeap<Integer>(copyList);
     }
 
     @Test
@@ -44,24 +44,24 @@ public class BinaryMaxHeapTester {
             assertEquals(emptyHeap.extractMax(), i);
         }
     }
-    
+
     @Test
     void reverseTest() {
-    	BinaryMaxHeap<Integer> reverseHeap = new BinaryMaxHeap<Integer>(Comparator.reverseOrder());
-    	for (int i = 0; i <= 10; i++) {
-    		reverseHeap.add(i);
-    	}
-    	for (int i = 0; i <= 10; i++) {
-    		assertEquals(reverseHeap.extractMax(), i);
-    	}
+        BinaryMaxHeap<Integer> reverseHeap = new BinaryMaxHeap<Integer>(Comparator.reverseOrder());
+        for (int i = 0; i <= 10; i++) {
+            reverseHeap.add(i);
+        }
+        for (int i = 0; i <= 10; i++) {
+            assertEquals(reverseHeap.extractMax(), i);
+        }
     }
-    
+
     @Test
     void reverseListTest() {
-    	BinaryMaxHeap<Integer> reverseHeap = new BinaryMaxHeap<Integer>(list, Comparator.reverseOrder());
-    	for (int i = 0; i <= 100; i++) {
-    		assertEquals(reverseHeap.extractMax(), i);
-    	}
+        BinaryMaxHeap<Integer> reverseHeap = new BinaryMaxHeap<Integer>(list, Comparator.reverseOrder());
+        for (int i = 0; i <= 100; i++) {
+            assertEquals(reverseHeap.extractMax(), i);
+        }
     }
 
     @Test
@@ -107,7 +107,7 @@ public class BinaryMaxHeapTester {
         tester.add(97);
         assertEquals(tester, temp);
     }
-    
+
     @Test
     void kthLargestReverseTest() {
         List<Integer> temp = findKLargestHeap(list, 4, Comparator.reverseOrder());
@@ -118,7 +118,7 @@ public class BinaryMaxHeapTester {
         tester.add(3);
         assertEquals(tester, temp);
     }
-    
+
     @Test
     void kthLargestSortTest() {
         List<Integer> temp = findKLargestSort(list, 4);
@@ -129,7 +129,7 @@ public class BinaryMaxHeapTester {
         tester.add(97);
         assertEquals(tester, temp);
     }
-    
+
     @Test
     void kthLargestReverseSortTest() {
         List<Integer> temp = findKLargestSort(list, 4, Comparator.reverseOrder());
@@ -140,17 +140,17 @@ public class BinaryMaxHeapTester {
         tester.add(3);
         assertEquals(tester, temp);
     }
-    
+
     @Test
     void kethLargestThrowTest1() {
-    	assertThrows(IllegalArgumentException.class, () -> { findKLargestHeap(list, -1); });
-    	assertThrows(IllegalArgumentException.class, () -> { findKLargestHeap(list, 1000); });
-    	assertThrows(IllegalArgumentException.class, () -> { findKLargestHeap(list, -1, Comparator.reverseOrder()); });
-    	assertThrows(IllegalArgumentException.class, () -> { findKLargestHeap(list, 1000, Comparator.reverseOrder()); });
-    	assertThrows(IllegalArgumentException.class, () -> { findKLargestSort(list, -1); });
-    	assertThrows(IllegalArgumentException.class, () -> { findKLargestSort(list, 1000); });
-    	assertThrows(IllegalArgumentException.class, () -> { findKLargestSort(list, -1, Comparator.reverseOrder()); });
-    	assertThrows(IllegalArgumentException.class, () -> { findKLargestSort(list, 1000, Comparator.reverseOrder()); });
+        assertThrows(IllegalArgumentException.class, () -> { findKLargestHeap(list, -1); });
+        assertThrows(IllegalArgumentException.class, () -> { findKLargestHeap(list, 1000); });
+        assertThrows(IllegalArgumentException.class, () -> { findKLargestHeap(list, -1, Comparator.reverseOrder()); });
+        assertThrows(IllegalArgumentException.class, () -> { findKLargestHeap(list, 1000, Comparator.reverseOrder()); });
+        assertThrows(IllegalArgumentException.class, () -> { findKLargestSort(list, -1); });
+        assertThrows(IllegalArgumentException.class, () -> { findKLargestSort(list, 1000); });
+        assertThrows(IllegalArgumentException.class, () -> { findKLargestSort(list, -1, Comparator.reverseOrder()); });
+        assertThrows(IllegalArgumentException.class, () -> { findKLargestSort(list, 1000, Comparator.reverseOrder()); });
     }
 
     @Test
