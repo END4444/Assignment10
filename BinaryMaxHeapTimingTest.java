@@ -25,12 +25,13 @@ public class BinaryMaxHeapTimingTest {
             largeIntegerList.add(i);
             nextIntegerList.add(i);
         }
+        largeIntegerList.add(1000001);
     }
 
     @Test
     void addTime() {
         BinaryMaxHeap<Integer> tester = new BinaryMaxHeap<Integer>();
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1; i <= 100; i++) {
             for (int y = 0; y < 10000 * i; y++) {
                 tester.add(largeIntegerList.get(y));
             }
@@ -54,7 +55,7 @@ public class BinaryMaxHeapTimingTest {
     @Test
     void ExtractMaxTime() {
         BinaryMaxHeap<Integer> tester = new BinaryMaxHeap<Integer>();
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1; i <= 100; i++) {
             for (int y = 0; y < 10000 * i; y++) {
                 tester.add(largeIntegerList.get(y));
             }
@@ -78,7 +79,7 @@ public class BinaryMaxHeapTimingTest {
     @Test
     void PeekTime() {
         BinaryMaxHeap<Integer> tester = new BinaryMaxHeap<Integer>();
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1; i <= 100; i++) {
             for (int y = 0; y < 10000 * i; y++) {
                 tester.add(largeIntegerList.get(y));
             }
@@ -102,7 +103,7 @@ public class BinaryMaxHeapTimingTest {
     @Test
     void kthLargestHeapTime() {
 
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1; i <= 100; i++) {
 
             long startTime = System.nanoTime();
             for (int j = 0; j < 100; j++) {
@@ -122,7 +123,7 @@ public class BinaryMaxHeapTimingTest {
     @Test
     void kthLargestSortTime() {
 
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1; i <= 100; i++) {
 
             long startTime = System.nanoTime();
             for (int j = 0; j < 100; j++) {
