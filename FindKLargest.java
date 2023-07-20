@@ -22,16 +22,13 @@ public class FindKLargest {
 	 * @throws IllegalArgumentException if k is negative or larger than the size of the given list
 	 */
 	public static <E extends Comparable<? super E>> List<E> findKLargestHeap(List<E> items, int k) throws IllegalArgumentException {
-
-		if(k> items.size()||k<0)
+		if(k > items.size() || k < 0)
 			throw new IllegalArgumentException("k is out of range");
-		BinaryMaxHeap<E> heap = new BinaryMaxHeap<>(items);
+		BinaryMaxHeap<E> heap = new BinaryMaxHeap<E>(items);
 		List<E> tempList = new ArrayList<E>();
 		for (int i = 1; i <= k; ++i)
 			tempList.add(heap.extractMax()) ;
-
 		return tempList;
-
 	}
 
 	/**
@@ -44,13 +41,12 @@ public class FindKLargest {
 	 * @throws IllegalArgumentException if k is negative or larger than the size of the given list
 	 */
 	public static <E> List<E> findKLargestHeap(List<E> items, int k, Comparator<? super E> cmp) throws IllegalArgumentException {
-		if(k> items.size()||k<0)
+		if(k > items.size() || k < 0)
 			throw new IllegalArgumentException("k is out of range");
-		BinaryMaxHeap<E> heap = new BinaryMaxHeap<>(items,cmp);
+		BinaryMaxHeap<E> heap = new BinaryMaxHeap<E>(items,cmp);
 		List<E> tempList = new ArrayList<E>();
 		for (int i = 1; i <= k; ++i)
 			tempList.add(heap.extractMax()) ;
-
 		return tempList;
 	}
 
@@ -64,16 +60,16 @@ public class FindKLargest {
 	 * @throws IllegalArgumentException if k is negative or larger than the size of the given list
 	 */
 	public static <E extends Comparable<? super E>> List<E> findKLargestSort(List<E> items, int k) throws IllegalArgumentException {
-
-		if(k> items.size()||k<0)
+		if(k > items.size() || k < 0)
 			throw new IllegalArgumentException("k is out of range");
+		// Creates a copy of the list so the original is unchanged
 		List<E> itemsCopy = new ArrayList<E>();
 		for (E item: items) {
 			itemsCopy.add(item);
 		}
 		itemsCopy.sort(Comparator.naturalOrder());
 		List<E> tempList = new ArrayList<E>();
-		for(int i = itemsCopy.size()-1; i> itemsCopy.size()-1-k;i--)
+		for(int i = itemsCopy.size()-1; i > itemsCopy.size()-1-k; i--)
 			tempList.add(itemsCopy.get(i));
 		return tempList;
 	}
@@ -88,16 +84,16 @@ public class FindKLargest {
 	 * @throws IllegalArgumentException if k is negative or larger than the size of the given list
 	 */
 	public static <E> List<E> findKLargestSort(List<E> items, int k, Comparator<? super E> cmp) throws IllegalArgumentException {
-		if(k> items.size()||k<0)
+		if(k > items.size() || k < 0)
 			throw new IllegalArgumentException("k is out of range");
-
+		// Creates a copy of the list so the original is unchanged
 		List<E> itemsCopy = new ArrayList<E>();
 		for (E item: items) {
 			itemsCopy.add(item);
 		}
 		itemsCopy.sort(cmp);
 		List<E> tempList = new ArrayList<E>();
-		for(int i = itemsCopy.size()-1; i> itemsCopy.size()-1-k;i--)
+		for(int i = itemsCopy.size()-1; i > itemsCopy.size()-1-k; i--)
 			tempList.add(itemsCopy.get(i));
 		return tempList;
 	}
