@@ -64,7 +64,7 @@ public class BinaryMaxHeapTimingTest {
 
             long startTime = System.nanoTime();
             for (int j = 0; j < 10000; j++) {
-                tester.add(nextIntegerList.get(((i * 10000) + 1)) + 1);
+                tester.add(nextIntegerList.get(0);
                 tester.extractMax();
             }
             long endTime = System.nanoTime();
