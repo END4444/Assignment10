@@ -3,6 +3,7 @@ package assignment10;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
+
 /**
  * Creates a binary max heap where the first node is the maximum and each child is less then its parents
  * implements the PriorityQueue interface
@@ -13,10 +14,11 @@ import java.util.NoSuchElementException;
  * @param <E>
  */
 public class BinaryMaxHeap <E> implements PriorityQueue<E>{
+
     private E[] backingArray;
-    int size;
-    int startingArraySize =10;
-    Comparator<? super E> cmp;
+    private int size;
+    private int startingArraySize =10;
+    private Comparator<? super E> cmp;
 
     /**
      * Constructor with no arguements
@@ -27,6 +29,7 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
         backingArray = (E[]) new Object[startingArraySize];
         size = 0;
     }
+
     /**
      * Constructor for a custom comparator
      *
@@ -44,7 +47,6 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
      *
      * @param list
      */
-    @SuppressWarnings("unchecked")
     public BinaryMaxHeap(List<? extends E> list){
         size = list.size();
         buildHeap(list);
@@ -70,14 +72,11 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
      *
      * @param item
      */
-    @Override
     public void add(E item) {
         if(size == backingArray.length - 1)
             this.growArray(backingArray.length*2 + 1);
         size++;
-
         percolateUp(item, size);
-
     }
 
     /**
@@ -87,7 +86,6 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
      * @return the maximum item
      * @throws NoSuchElementException if this priority queue is empty
      */
-    @Override
     public E peek() throws NoSuchElementException {
         if (backingArray[1]==null)
             throw new NoSuchElementException("there is no max element to return");
@@ -101,16 +99,12 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
      * @return the maximum item
      * @throws NoSuchElementException if this priority queue is empty
      */
-    @Override
     public E extractMax() throws NoSuchElementException {
         E maxItem = this.peek();
-
         backingArray[1] = backingArray[size];
         backingArray[size] = null;
         size--;
         percolateDown(1);
-
-
         return maxItem;
     }
 
@@ -118,18 +112,16 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
      * Returns the number of items in this priority queue.
      * O(1)
      */
-    @Override
     public int size() {
-        return this.size;
+        return size;
     }
 
     /**
      * Returns true if this priority queue is empty, false otherwise.
      * O(1)
      */
-    @Override
     public boolean isEmpty() {
-        return this.size==0;
+        return size==0;
     }
 
     /**
@@ -137,7 +129,6 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
      * O(1)
      */
     @SuppressWarnings("unchecked")
-    @Override
     public void clear() {
         backingArray = (E[]) new Object[startingArraySize];
         size = 0;
@@ -152,10 +143,9 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
      * must be stored at index 0 in the returned array, regardless of
      * whether it is in stored there in the backing array.)
      */
-    @Override
     public Object[] toArray() {
         Object[] newArray = new Object[size];
-        for(int i = 1; i<=size; i++)
+        for(int i = 1; i <= size; i++)
             newArray[i-1] = backingArray[i];
         return newArray;
     }
@@ -172,8 +162,6 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
             backingArray[i] = list.get(i-1);
         for(int i = (backingArray.length-1)/2; i > 0; i--)
             percolateDown(i);
-
-
     }
 
     /**
@@ -198,7 +186,6 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
         int child;
         int loc = i;
         E temp = backingArray[i];
-
         for( ; loc*2 <= size; loc = child){
             child = loc*2;
             if(child != size && innerCompare( backingArray[child],backingArray[child+1] )> 0)
@@ -208,7 +195,6 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
             else
                 break;
         }
-
         backingArray[loc] = temp;
     }
 
