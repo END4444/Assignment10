@@ -2,7 +2,6 @@ package assignment10;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.*;
 
 import static assignment10.FindKLargest.*;
@@ -18,6 +17,7 @@ public class BinaryMaxHeapTester {
 
     BinaryMaxHeap<Integer> emptyHeap = new BinaryMaxHeap<Integer>();
     BinaryMaxHeap<Integer> intHeap;
+    BinaryMaxHeap<String> stringHeap = new BinaryMaxHeap<String>();
     List<Integer> list = new ArrayList<Integer>();
     List<Integer> copyList = new ArrayList<Integer>();
     List<Integer> smallList = new ArrayList<Integer>();
@@ -33,8 +33,14 @@ public class BinaryMaxHeapTester {
         }
         Collections.shuffle(copyList);
         intHeap=new BinaryMaxHeap<Integer>(copyList);
+        stringHeap.add("apple");
+        stringHeap.add("banana");
+        stringHeap.add("cherry");
+        stringHeap.add("date");
+        stringHeap.add("eggplant");
     }
 
+    // Binary heap tests
     @Test
     void addAndExtractMaxTest() {
         for (int i = 1; i <= 10; i++) {
@@ -43,6 +49,15 @@ public class BinaryMaxHeapTester {
         for (int i = 10; i > 0; i--) {
             assertEquals(emptyHeap.extractMax(), i);
         }
+    }
+
+    @Test
+    void extractMaxStringTest() {
+        assertEquals(stringHeap.extractMax(), "eggplant");
+        assertEquals(stringHeap.extractMax(), "date");
+        assertEquals(stringHeap.extractMax(), "cherry");
+        assertEquals(stringHeap.extractMax(), "banana");
+        assertEquals(stringHeap.extractMax(), "apple");
     }
 
     @Test
@@ -75,6 +90,11 @@ public class BinaryMaxHeapTester {
     }
 
     @Test
+    void stringPeekTest() {
+        assertEquals(stringHeap.peek(), "eggplant");
+    }
+
+    @Test
     void peekThrowTest() {
         assertThrows(NoSuchElementException.class, () -> { emptyHeap.peek(); });
     }
@@ -82,6 +102,8 @@ public class BinaryMaxHeapTester {
     @Test
     void sizeTest() {
         assertEquals(intHeap.size(), 101);
+        assertEquals(emptyHeap.size(), 0);
+        assertEquals(stringHeap.size(), 5);
     }
 
     @Test
@@ -97,6 +119,7 @@ public class BinaryMaxHeapTester {
         assertTrue(intHeap.isEmpty());
     }
 
+    // Kth largest tests
     @Test
     void kthLargestTest() {
         List<Integer> temp = findKLargestHeap(list, 4);
@@ -142,11 +165,15 @@ public class BinaryMaxHeapTester {
     }
 
     @Test
-    void kethLargestThrowTest1() {
+    void kethLargestThrowTestHeap() {
         assertThrows(IllegalArgumentException.class, () -> { findKLargestHeap(list, -1); });
         assertThrows(IllegalArgumentException.class, () -> { findKLargestHeap(list, 1000); });
         assertThrows(IllegalArgumentException.class, () -> { findKLargestHeap(list, -1, Comparator.reverseOrder()); });
         assertThrows(IllegalArgumentException.class, () -> { findKLargestHeap(list, 1000, Comparator.reverseOrder()); });
+    }
+
+    @Test
+    void kethLargestThrowTestSort() {
         assertThrows(IllegalArgumentException.class, () -> { findKLargestSort(list, -1); });
         assertThrows(IllegalArgumentException.class, () -> { findKLargestSort(list, 1000); });
         assertThrows(IllegalArgumentException.class, () -> { findKLargestSort(list, -1, Comparator.reverseOrder()); });
