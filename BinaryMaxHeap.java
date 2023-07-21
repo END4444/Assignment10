@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
  * implements the PriorityQueue interface
  *
  * @author Austin Allen and Ethan Doman
- * @version July 18, 2023
+ * @version July 19, 2023
  *
  * @param <E>
  */
@@ -21,11 +21,10 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
     private Comparator<? super E> cmp;
 
     /**
-     * Constructor with no arguements
+     * Constructor with no arguments
      */
     @SuppressWarnings("unchecked")
     public BinaryMaxHeap(){
-
         backingArray = (E[]) new Object[startingArraySize];
         size = 0;
     }
@@ -151,7 +150,7 @@ public class BinaryMaxHeap <E> implements PriorityQueue<E>{
     }
 
     /**
-     * Private helper method fro building the heap using an ordered list.
+     * Private helper method for building the heap using an ordered list.
      *
      * @param list
      */
